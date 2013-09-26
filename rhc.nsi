@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "OpenShift-RHC"
-!define PRODUCT_VERSION "1.9.3-1"
+!define PRODUCT_VERSION "1.0.0-1"
 !define PRODUCT_PUBLISHER "OpenShift Origin"
 !define PRODUCT_WEB_SITE "http://openshift.com/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\${PRODUCT_NAME}"
