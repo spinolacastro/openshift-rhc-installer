@@ -113,7 +113,10 @@ FunctionEnd
 
 Var libraServerDialog
 Var libraServerLabel
-Var libraServerTextBox
+Var getupLibraServerRadio
+Var redhatLibraServerRadio
+Var customLibraServerRadio
+Var customLibraServerText
 
 ; dialog create function
 Function libraServerPage
@@ -127,22 +130,54 @@ Function libraServerPage
   !insertmacro MUI_HEADER_TEXT "Configure OpenShift RHC" ""
   
   ; === Label ===
-  ${NSD_CreateLabel} 8u 5u 91u 9u "OpenShift API URL"
+  ${NSD_CreateLabel} 8u 5u 91u 9u "OpenShift Broker URL:"
   Pop $libraServerLabel
-  
-  ; === TextBox ===
-  ${NSD_CreateText} 8u 16u 124u 11u ""
-  Pop $libraServerTextBox
-  
-  
+
+  ; === RadioButton ===
+  ${NSD_CreateRadioButton} 8u 16u 300u 11u "Getup Cloud's OpenShift (https://broker.getupcloud.com)"
+  Pop $getupLibraServerRadio
+  ${NSD_Check} $getupLibraServerRadio
+
+  ${NSD_CreateRadioButton} 8u 32u 300u 11u "Red Hat's OpenShift Online (https://openshift.redhat.com)"
+  Pop $redhatLibraServerRadio
+
+  ${NSD_CreateRadioButton} 8u 48u 38u 11u "Custom:"
+  Pop $customLibraServerRadio
+  ${NSD_CreateText} 50u 48u 150u 11u ""
+  Pop $customLibraServerText
+
   nsDialogs::Show $libraServerDialog
 FunctionEnd
 
+Var libraServerState
+Var libraServerURL
+
 ; dialog leave function
 Function libraServerPageLeave
-  ${NSD_GetText} $libraServerTextBox $0
+
+  ${NSD_GetText} $customLibraServerText $libraServerURL
+
+  ${NSD_GetState} $getupLibraServerRadio $0
+  ${If} $0 == ${BST_CHECKED}
+    StrCpy $libraServerURL "https://broker.getupcloud.com"
+  ${EndIf}
+
+  ${NSD_GetState} $redhatLibraServerRadio $0
+  ${If} $0 == ${BST_CHECKED}
+    StrCpy $libraServerURL "https://openshift.redhat.com"
+  ${EndIf}
+
+  ${NSD_GetState} $customLibraServerRadio $0
+  ${If} $0 == ${BST_CHECKED}
+    ${NSD_GetText} $customLibraServerText $libraServerURL
+  ${EndIf}
+
+  ${If} $libraServerURL == ""
+    MessageBox MB_OK "Please, select one option or insert a valid OpenShift broker URL."
+  ${EndIf}
+
   ; set variable
-  WriteRegExpandStr ${env_hklm} "LIBRA_SERVER" "$0"
+  WriteRegExpandStr ${env_hklm} "LIBRA_SERVER" "$libraServerURL"
 FunctionEnd
 
 Function .onInit
