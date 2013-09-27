@@ -325,9 +325,9 @@ Section "install rhc" SEC04
   StrCpy $status ''
   ; install rhc locally
   ${If} $HTTP_PROXY == ''
-    ExecWait '"$INSTDIR\ruby\bin\gem.bat" install rhc --no-rdoc --no-ri'
+    ExecWait '"$INSTDIR\ruby\bin\gem.bat" install rhc --no-rdoc --no-ri -V'
   ${Else}
-    ExecWait '"$INSTDIR\ruby\bin\gem.bat" install --http-proxy "$HTTP_PROXY" rhc --no-rdoc --no-ri'
+    ExecWait '"$INSTDIR\ruby\bin\gem.bat" install --http-proxy "$HTTP_PROXY" rhc --no-rdoc --no-ri -V'
   ${EndIf}
 
   IfErrors onError
