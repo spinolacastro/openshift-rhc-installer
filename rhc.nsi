@@ -375,6 +375,9 @@ Section Uninstall
   Delete "$SMPROGRAMS\rhc\Website.lnk"
   Delete "$DESKTOP\rhc.lnk"
   Delete "$SMPROGRAMS\rhc\rhc.lnk"
+  Delete "$INSTDIR\openshift.ico"
+  Delete "$INSTDIR\${GIT_INSTALLER}"
+  Delete "$INSTDIR\${RUBY_INSTALLER}"
 
   RMDir "$SMPROGRAMS\rhc"
   RMDir "$INSTDIR"
