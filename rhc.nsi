@@ -272,7 +272,7 @@ Section "install git bash" SEC02
   IfFileExists ${GIT_INSTALLER} installGit
 
   ; download and install
-  NSISdl::download "https://msysgit.googlecode.com/files/${GIT_INSTALLER}" "${GIT_INSTALLER}"
+  NSISdl::download /PROXY "$HTTP_PROXY" "https://msysgit.googlecode.com/files/${GIT_INSTALLER}" "${GIT_INSTALLER}"
   Pop $R0
   ${If} $R0 <> 'success'
     ; download not successfull
@@ -298,7 +298,7 @@ Section "install ruby" SEC03
   ; download and install
   IfFileExists ${RUBY_INSTALLER} installRuby
 
-  NSISdl::download "http://rubyforge.org/frs/download.php/76952/${RUBY_INSTALLER}" ${RUBY_INSTALLER}
+  NSISdl::download /PROXY "$HTTP_PROXY" "http://rubyforge.org/frs/download.php/76952/${RUBY_INSTALLER}" ${RUBY_INSTALLER}
   Pop $R0
   ${If} $R0 <> 'success'
     ; download not successfull
@@ -385,5 +385,5 @@ Section Uninstall
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
   SetAutoClose true
-  ${un.EnvVarUpdate} $0 "PATH" "R" "HKCU" "$INSTDIR"
+  ${un.EnvVarUpdate} $0 "PATH" "R" "HKCU" "$INSTDIR"  
 SectionEnd
