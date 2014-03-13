@@ -298,7 +298,7 @@ Section "install ruby" SEC03
   ; download and install
   IfFileExists ${RUBY_INSTALLER} installRuby
 
-  NSISdl::download /PROXY "$HTTP_PROXY" "http://rubyforge.org/frs/download.php/76952/${RUBY_INSTALLER}" ${RUBY_INSTALLER}
+  NSISdl::download /PROXY "$HTTP_PROXY" "http://files.rubyforge.vm.bytemark.co.uk/rubyinstaller/${RUBY_INSTALLER}" ${RUBY_INSTALLER}
   Pop $R0
   ${If} $R0 <> 'success'
     ; download not successfull
