@@ -10,7 +10,7 @@ SetCompressor /SOLID lzma
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define GIT_INSTALLER "Git-1.8.1.2-preview20130201.exe"
-!define RUBY_INSTALLER "rubyinstaller-1.9.3-p429.exe"
+!define RUBY_INSTALLER "rubyinstaller-1.9.3-p484.exe"
 
 ; MUI 1.67 compatible ------
 !include "MUI.nsh"
@@ -298,7 +298,7 @@ Section "install ruby" SEC03
   ; download and install
   IfFileExists ${RUBY_INSTALLER} installRuby
 
-  NSISdl::download /PROXY "$HTTP_PROXY" "http://files.rubyforge.vm.bytemark.co.uk/rubyinstaller/${RUBY_INSTALLER}" ${RUBY_INSTALLER}
+  NSISdl::download /PROXY "$HTTP_PROXY" "http://dl.bintray.com/oneclick/rubyinstaller/${RUBY_INSTALLER}" ${RUBY_INSTALLER}
   Pop $R0
   ${If} $R0 <> 'success'
     ; download not successfull
