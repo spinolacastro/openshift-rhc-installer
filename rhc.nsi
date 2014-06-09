@@ -10,7 +10,7 @@ SetCompressor /SOLID lzma
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 !define GIT_INSTALLER "Git-1.8.1.2-preview20130201.exe"
-!define RUBY_INSTALLER "rubyinstaller-1.9.3-p484.exe"
+!define RUBY_INSTALLER "rubyinstaller-1.9.3-p545.exe"
 
 ; MUI 1.67 compatible ------
 !include "MUI.nsh"
